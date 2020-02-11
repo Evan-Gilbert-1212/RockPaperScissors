@@ -11,11 +11,8 @@ namespace RockPaperScissors
       //Welcome Message To The User
       Console.WriteLine("Welcome to Rock, Paper, Scissors, Lizard, Spock!");
 
-      //Initialize loop variable
+      //Initialize loop boolean variable
       var continuePlaying = true;
-
-      //Initialize result string
-      var resultString = "";
 
       //ADVENTURE: Allow the user to play again (while loop)
       while (continuePlaying)
@@ -51,7 +48,7 @@ namespace RockPaperScissors
 
         //Add validation to ensure a correct input is given
         while (userSelection != "rock" && userSelection != "paper" && userSelection != "scissors" &&
-            userSelection != "lizard" && userSelection != "spock")
+               userSelection != "lizard" && userSelection != "spock")
         {
           Console.WriteLine("You have entered an invalid selection. Please choose from Rock, Paper, Scissors, Lizard and Spock.");
 
@@ -60,78 +57,15 @@ namespace RockPaperScissors
           userSelection = Console.ReadLine().ToLower();
         }
 
-        //Initialize computers choice variable
-        var strComputerChoice = "";
-
-        //Easy Difficulty: Computer always selects losing option.
-        if (difficulty == "easy")
-        {
-          if (userSelection == "rock")
-          {
-            strComputerChoice = "scissors";
-          }
-          else if (userSelection == "paper")
-          {
-            strComputerChoice = "rock";
-          }
-          else if (userSelection == "scissors")
-          {
-            strComputerChoice = "paper";
-          }
-          else if (userSelection == "lizard")
-          {
-            strComputerChoice = "paper";
-          }
-          else if (userSelection == "spock")
-          {
-            strComputerChoice = "rock";
-          }
-        }
-        //Normal Difficulty: Computer selects random option.
-        else if (difficulty == "normal")
-        {
-          //Computer Picks Random Option
-          Random rnd = new Random();
-
-          //Define array of possible picks for computer
-          string[] possibleSelections = { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
-
-          //random integer within the bounds of the length of the array
-          int computerChoice = rnd.Next(possibleSelections.Length);
-
-          //String value from array based on the array index
-          strComputerChoice = possibleSelections[computerChoice].ToLower();
-        }
-        //Impossible Difficulty: Computer always selects winning option.
-        else if (difficulty == "impossible")
-        {
-          if (userSelection == "rock")
-          {
-            strComputerChoice = "paper";
-          }
-          else if (userSelection == "paper")
-          {
-            strComputerChoice = "scissors";
-          }
-          else if (userSelection == "scissors")
-          {
-            strComputerChoice = "rock";
-          }
-          else if (userSelection == "lizard")
-          {
-            strComputerChoice = "scissors";
-          }
-          else if (userSelection == "spock")
-          {
-            strComputerChoice = "paper";
-          }
-        }
+        //Initialize computer choice variable and get computers choice
+        var strComputerChoice = getComputerSelection(userSelection, difficulty);
 
         //Display the computers choice
         Console.WriteLine("The computer has selected: " + strComputerChoice);
 
-        //Initialize result string
+        //Initialize result strings
         var userResult = "";
+        var resultString = "";
 
         //Determine the winner
         if (userSelection == "rock")
@@ -308,8 +242,89 @@ namespace RockPaperScissors
 
       //Sign off message
       Console.WriteLine("Thank you for playing!");
+    }
 
-      //EPIC: Add the ability to add more than 2 players in the game (real or computer)
+    static string randomGenerator()
+    {
+      //Initialize random number 
+      Random rnd = new Random();
+
+      //Define array of possible picks for computer
+      string[] possibleSelections = { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
+
+      //random integer within the bounds of the length of the array
+      int computerChoice = rnd.Next(possibleSelections.Length);
+
+      //Return string value from array based on the array index
+      return possibleSelections[computerChoice].ToLower();
+    }
+
+    static string getComputerSelection(string userInput, string diffMode)
+    {
+      if (diffMode == "easy")
+      {
+        if (userInput == "rock")
+        {
+          return "scissors";
+        }
+        else if (userInput == "paper")
+        {
+          return "rock";
+        }
+        else if (userInput == "scissors")
+        {
+          return "paper";
+        }
+        else if (userInput == "lizard")
+        {
+          return "paper";
+        }
+        else if (userInput == "spock")
+        {
+          return "rock";
+        }
+        else
+        {
+          return "";
+        }
+      }
+      //Normal Difficulty: Computer selects random option.
+      else if (diffMode == "normal")
+      {
+        return randomGenerator();
+      }
+      //Impossible Difficulty: Computer always selects winning option.
+      else if (diffMode == "impossible")
+      {
+        if (userInput == "rock")
+        {
+          return "paper";
+        }
+        else if (userInput == "paper")
+        {
+          return "scissors";
+        }
+        else if (userInput == "scissors")
+        {
+          return "rock";
+        }
+        else if (userInput == "lizard")
+        {
+          return "scissors";
+        }
+        else if (userInput == "spock")
+        {
+          return "paper";
+        }
+        else
+        {
+          return "";
+        }
+      }
+      else
+      {
+        return "";
+      }
     }
   }
 }
