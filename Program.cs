@@ -13,6 +13,8 @@ namespace RockPaperScissors
 
       //Initialize loop variable
       var continuePlaying = true;
+
+      //Initialize result string
       var resultString = "";
 
       //ADVENTURE: Allow the user to play again (while loop)
@@ -26,7 +28,7 @@ namespace RockPaperScissors
         var difficulty = Console.ReadLine().ToLower();
 
         //Add verification to ensure a valid difficulty is selected
-        if (difficulty != "easy" && difficulty != "normal" && difficulty != "impossible")
+        while (difficulty != "easy" && difficulty != "normal" && difficulty != "impossible")
         {
           Console.WriteLine("You have entered an invalid difficulty level. Please enter a valid difficulty level.");
 
@@ -48,7 +50,7 @@ namespace RockPaperScissors
         var userSelection = Console.ReadLine().ToLower();
 
         //Add validation to ensure a correct input is given
-        if (userSelection != "rock" && userSelection != "paper" && userSelection != "scissors" &&
+        while (userSelection != "rock" && userSelection != "paper" && userSelection != "scissors" &&
             userSelection != "lizard" && userSelection != "spock")
         {
           Console.WriteLine("You have entered an invalid selection. Please choose from Rock, Paper, Scissors, Lizard and Spock.");
@@ -291,7 +293,7 @@ namespace RockPaperScissors
 
         var wantsToReplay = Console.ReadLine().ToLower();
 
-        if (wantsToReplay != "yes" && wantsToReplay != "no")
+        while (wantsToReplay != "yes" && wantsToReplay != "no")
         {
           Console.WriteLine("You have entered an invalid option. Please reply yes or no.");
 
